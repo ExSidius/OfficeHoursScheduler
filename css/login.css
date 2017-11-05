@@ -1,0 +1,151 @@
+/* Form */
+.form {
+  position: relative;
+  z-index: 1;
+  background: #FFFFFF;
+  max-width: 300px;
+  margin: 0 auto 100px;
+  padding: 30px;
+
+  border-top-left-radius: 3px;
+  border-top-right-radius: 3px;
+  border-bottom-left-radius: 3px;
+  border-bottom-right-radius: 3px;
+  text-align: center;
+}
+.form input {
+  outline: 0;
+  background: #f2f2f2;
+  width: 100%;
+  border: 0;
+  margin: 0 0 15px;
+  padding: 15px;
+  border-top-left-radius: 3px;
+  border-top-right-radius: 3px;
+  border-bottom-left-radius: 3px;
+  border-bottom-right-radius: 3px;
+  box-sizing: border-box;
+  font-size: 14px;
+}
+.form button {
+  outline: 0;
+  background: #303b4f;
+  width: 100%;
+  border: 0;
+  padding: 15px;
+  border-top-left-radius: 3px;
+  border-top-right-radius: 3px;
+  border-bottom-left-radius: 3px;
+  border-bottom-right-radius: 3px;
+  color: #FFFFFF;
+  font-size: 14px;
+  -webkit-transition: all 0.3 ease;
+  transition: all 0.3 ease;
+  cursor: pointer;
+}
+.form .message {
+  margin: 15px 0 0;
+  color: #b3b3b3;
+  font-size: 12px;
+}
+.form .message a {
+  color: #303b4f;
+  text-decoration: none;
+}
+.form .register-form {
+  display: none;
+}
+.form .minilogo {
+  position: relative;
+}
+.form .minilogo img {
+    position: absolute;
+    top: -30px;
+    left: -30px;
+    width: 60px;
+    height: 60px;
+}
+.form .myButton {
+  position: relative;
+  outline: 0;
+  background: #f2f2f2;
+  width: 100%;
+  border: 0;
+  margin: 30px 0 15px;
+  padding: 10px;
+  top: 30px;
+  border-top-left-radius: 3px;
+  border-top-right-radius: 3px;
+  border-bottom-left-radius: 3px;
+  border-bottom-right-radius: 3px;
+  box-sizing: border-box;
+  font-size: 14px;
+}
+
+body {
+  background: #ccc;
+  font-family: "Roboto", sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+body:before {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  display: block;
+  background: rgba(255, 255, 255, 0.8);
+  width: 100%;
+  height: 100%;
+}
+
+#login{
+  background-color: #303b4f;
+  color: white;
+}
+#create{
+  background-color: #303b4f;
+  color: white;
+}
+
+#logo{
+  color: #303b4f;
+  margin-top: -10px;
+  text-align: center;
+  font-size: 15em;
+}
+
+.name{
+  margin-top: -10px;
+  margin-bottom: 10px;
+  text-transform: uppercase;
+  letter-spacing: .12em;
+  text-align: center; 
+}
+#name{
+  /* over ride w !important and target with ids*/
+  color: #303b4f;
+  font-weight: 100 !important;
+  font-size: 3em;
+}
+#minilogo{
+  color: #303b4f;
+  text-align: left;
+  font-size: 2em;
+}
+#minilogo a:link {
+    color: #303b4f !important;
+}
+
+#minilogo a:visited {
+    color: #303b4f !important;
+}
+
+#minilogo a:hover {
+  text-decoration: none;
+    color: #303b4f !important;
+}
+
+#minilogo a:active{
+    color: #6e7684 !important;
+}
