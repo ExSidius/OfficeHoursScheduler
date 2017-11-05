@@ -149,3 +149,9 @@ body:before {
 #minilogo a:active{
     color: #6e7684 !important;
 }
+
+.material-icons {
+  font-size:200px;
+  color:lightblue;
+  text-shadow:2px 2px 4px #000000;
+}
