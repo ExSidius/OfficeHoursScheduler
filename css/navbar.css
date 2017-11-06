@@ -1,0 +1,43 @@
+.navbar {
+    background: #313c4f;
+}
+.navbar .navbar-brand {
+    color: #FFFFFF;
+    /*font-family: "Josefin Sans", sans-serif;*/
+    /*font-weight: 900;*/
+    /*font-size: 200%;*/
+}
+
+.navbar .navbar-brand:active {
+    color: #FFFFFF;
+    /*font-family: "Josefin Sans", sans-serif;*/
+    /*font-weight: 900;*/
+    /*font-size: 200%;*/
+}
+
+.my-nav-links {
+    color: #FFFFFF !important;
+    /*font-size: 150%;*/
+    /*font-family: "Josefin Sans", sans-serif;*/
+}
+
+
+.icon-bar {
+    background: #FFFFFF !important;
+}
+
+.navbar-toggle {
+    background: #313c4f !important; /*Whatever colour you want for background */
+}
+
+.navbar-toggle:hover {
+    background: #313c4f !important; /*Whatever colour you want for background */
+}
+
+.navbar-toggle:active {
+    background: #313c4f !important; /*Whatever colour you want for background */
+}
+
+.line-right {
+    border-right: 1px solid #FFFFFF !important;
+}
