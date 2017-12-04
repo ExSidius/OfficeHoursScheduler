@@ -79,7 +79,8 @@ function addStudent($id, $name, $section) {
 
 }
 
-function addToCurrentQueue() {
+function addToCurrentQueue($id, $name, $issue) {
+
 	$link = connectToDB();
 
 	$sql = "SELECT COUNT(*) FROM currentQ";
@@ -91,19 +92,35 @@ function addToCurrentQueue() {
 	$result = mysqli_query($link, $sql);
 	$rows = $result->fetch_array(MYSQLI_NUM)[0];
 
-	echo $rows;
+	$position = $rows + 1;
 
-	// $sql = "INSERT INTO currentQ (id, name, issue, aptTime, position)
-	// 		VALUES ('$id', '$name', '$section')";
+	$date = date("Y-m-d h:i:sa");
 
-	// if(mysqli_query($link, $sql) === false){
-	//     die("ERROR: Could not able to execute $sql. " . mysqli_error($link));
-	// }
+	$sql = "INSERT INTO currentQ (id, name, issue, aptTime, position)
+			VALUES ('$id', '$name', '$issue', '$date', '$position')";
+
+	if(mysqli_query($link, $sql) === false){
+	    die("ERROR: Could not able to execute $sql. " . mysqli_error($link));
+	}
 
 	mysqli_close($link);
+
 }
 
-addToCurrentQueue();
+function addToPastQueue($id, $name, $issue, $date) {
+
+	$link = connectToDB();
+
+	$sql = "INSERT INTO currentQ (id, name, issue, aptTime)
+			VALUES ('$id', '$name', '$issue', '$date')";
+
+	if(mysqli_query($link, $sql) === false){
+	    die("ERROR: Could not able to execute $sql. " . mysqli_error($link));
+	}
+
+	mysqli_close($link);
+
+}
 
 $body = <<<EOBODY
 <body>

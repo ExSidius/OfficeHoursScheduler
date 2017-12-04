@@ -105,7 +105,7 @@ $sql = "CREATE TABLE currentQ(
     id VARCHAR(100) NOT NULL,
     name VARCHAR(100) NOT NULL,
     issue VARCHAR(280) NOT NULL,
-    aptTime TIMESTAMP NOT NULL,
+    aptTime VARCHAR(25) NOT NULL,
     position int NOT NULL
 )";
 
@@ -126,8 +126,7 @@ $sql = "CREATE TABLE pastQ(
     id VARCHAR(100) NOT NULL,
     name VARCHAR(100) NOT NULL,
     issue VARCHAR(280) NOT NULL,
-    aptTime TIMESTAMP NOT NULL,
-    position int NOT NULL
+    aptTime VARCHAR(25) NOT NULL
 )";
 
 if(mysqli_query($link, $sql)){
