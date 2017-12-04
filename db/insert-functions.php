@@ -94,10 +94,11 @@ function addToCurrentQueue($id, $name, $issue) {
 
 	$position = $rows + 1;
 
-	$date = date("Y-m-d h:i:sa");
+	$time = date("Y-m-d h:i:sa");
+	$time = strtotime($time);
 
 	$sql = "INSERT INTO currentQ (id, name, issue, aptTime, position)
-			VALUES ('$id', '$name', '$issue', '$date', '$position')";
+			VALUES ('$id', '$name', '$issue', '$time', '$position')";
 
 	if(mysqli_query($link, $sql) === false){
 	    die("ERROR: Could not able to execute $sql. " . mysqli_error($link));
@@ -107,12 +108,12 @@ function addToCurrentQueue($id, $name, $issue) {
 
 }
 
-function addToPastQueue($id, $name, $issue, $date) {
+function addToPastQueue($id, $name, $issue, $time) {
 
 	$link = connectToDB();
 
-	$sql = "INSERT INTO currentQ (id, name, issue, aptTime)
-			VALUES ('$id', '$name', '$issue', '$date')";
+	$sql = "INSERT INTO pastQ (id, name, issue, aptTime)
+			VALUES ('$id', '$name', '$issue', '$time')";
 
 	if(mysqli_query($link, $sql) === false){
 	    die("ERROR: Could not able to execute $sql. " . mysqli_error($link));
@@ -121,6 +122,80 @@ function addToPastQueue($id, $name, $issue, $date) {
 	mysqli_close($link);
 
 }
+
+function removeOldRowsInPastQueue() {
+
+	$time = date("Y-m-d h:i:sa");
+	$timestamp = strtotime($time);
+
+	$cutoffTime =  $timestamp - 86400;
+	$link = connectToDB();
+
+	$sql = "DELETE FROM pastQ WHERE aptTime < $cutoffTime";
+
+	if(mysqli_query($link, $sql) === false){
+	    die("ERROR: Could not able to execute $sql. " . mysqli_error($link));
+	}
+
+	mysqli_close($link);
+
+}
+
+function updateCurrentQueue() {
+
+	$link = connectToDB();
+
+	$sql = "SELECT * FROM currentQ WHERE position=1";
+
+	if(mysqli_query($link, $sql) === false){
+	    die("ERROR: Could not able to execute $sql. " . mysqli_error($link));
+	}
+
+	$result = mysqli_query($link, $sql);
+
+	$arr = $result->fetch_assoc();
+
+	$id = $arr["id"];
+	$name = $arr["name"];
+	$issue = $arr["issue"];
+	$timestamp = $arr["aptTime"];
+
+	addToPastQueue($id, $name, $issue, $timestamp);
+
+	$sql = "DELETE FROM currentQ WHERE position=1";
+
+	if(mysqli_query($link, $sql) === false){
+	    die("ERROR: Could not able to execute $sql. " . mysqli_error($link));
+	}
+
+	$sql = "UPDATE currentQ SET position = position-1";
+
+	if(mysqli_query($link, $sql) === false){
+	    die("ERROR: Could not able to execute $sql. " . mysqli_error($link));
+	}
+
+	removeOldRowsInPastQueue();
+
+	mysqli_close($link);
+
+}
+
+// $time = date("Y-m-d h:i:sa");
+// $timestamp = strtotime($time);
+
+// $cutoffTime =  $timestamp - 86400;
+
+// addToCurrentQueue("mdn1023", "Michael Nguyen", "Entry 1");
+// addToCurrentQueue("mdn1023", "Michael Nguyen", "Entry 2");
+// addToCurrentQueue("mdn1023", "Michael Nguyen", "Entry 3");
+// addToCurrentQueue("mdn1023", "Michael Nguyen", "Entry 4");
+
+// updateCurrentQueue();
+
+// addToPastQueue("mdn1023", "Michael Nguyen", "This should be deleted.", $cutoffTime);
+// addToPastQueue("mdn1023", "Michael Nguyen", "This should NOT be deleted.", $timestamp);
+
+// removeOldRowsInPastQueue();
 
 $body = <<<EOBODY
 <body>
