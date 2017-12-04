@@ -44,7 +44,7 @@ $sql = "CREATE TABLE usersTA(
     name VARCHAR(100) NOT NULL,
     office VARCHAR(100) NOT NULL,
     photograph longblob NOT NULL,
-    section int NOT NULL
+    section VARCHAR(4) NOT NULL
 )";
 
 if(mysqli_query($link, $sql)){
@@ -64,7 +64,7 @@ $sql = "CREATE TABLE usersInstructor(
     name VARCHAR(100) NOT NULL,
     office VARCHAR(100) NOT NULL,
     photograph longblob NOT NULL,
-    section int NOT NULL
+    section VARCHAR(4) NOT NULL
 )";
 
 if(mysqli_query($link, $sql)){
@@ -82,7 +82,7 @@ if(mysqli_query($link, $sql)){
 
 $sql = "CREATE TABLE usersStudent(
     name VARCHAR(100) NOT NULL,
-    section int NOT NULL
+    section VARCHAR(4) NOT NULL
 )";
 
 if(mysqli_query($link, $sql)){
