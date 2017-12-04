@@ -248,6 +248,39 @@ function listOfStudentsOnCurrentQueue() {
 
 }
 
+// Returns size of the current queue
+function getCurrentQueueSize() {
+
+	return count(listOfStudentsOnCurrentQueue());
+
+}
+
+// Given a student ID, return that student's highest position in the current queue
+function getPositionInQueue($id) {
+
+	$link = connectToDB();
+
+	$sql = "SELECT position FROM currentQ WHERE id='$id'";
+
+	if(mysqli_query($link, $sql) === false){
+	    die("ERROR: Could not able to execute $sql. " . mysqli_error($link));
+	}
+
+	$result = mysqli_query($link, $sql);
+
+	$arr = $result->fetch_assoc();
+
+	if ($arr === null) {
+		return -1;
+	}
+	else {
+		return $arr["position"];
+	}
+
+	mysqli_close($link);
+
+}
+
 // $time = date("Y-m-d h:i:sa");
 // $timestamp = strtotime($time);
 
@@ -257,11 +290,18 @@ function listOfStudentsOnCurrentQueue() {
 // addToCurrentQueue("mdn1023", "Michael Nguyen", "Entry 2");
 // addToCurrentQueue("mdn1023", "Michael Nguyen", "Entry 3");
 // addToCurrentQueue("mdn1023", "Michael Nguyen", "Entry 4");
+// addToCurrentQueue("student1", "Student John", "Entry 5");
+// addToCurrentQueue("student1", "Student John", "Entry 6");
+// addToCurrentQueue("student1", "Student John", "Entry 7");
+
+// echo getPositionInQueue("student");
 
 // listOfStudentsOnCurrentQueue();
 
 // updateCurrentQueue();
 // echo getNumberOfTokens("mdn1023");
+
+// echo getCurrentQueueSize();
 
 // addToPastQueue("mdn1023", "Michael Nguyen", "This should be deleted.", $cutoffTime);
 // addToPastQueue("mdn1023", "Michael Nguyen", "This should NOT be deleted.", $timestamp);
