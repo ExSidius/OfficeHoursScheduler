@@ -170,7 +170,17 @@
 
                     studentQueue.innerHTML = "Students in Queue: " + queue[0];
                     queuePos.innerHTML = queue[1];
-                    timeLeft.innerHTML = queue[2] / parseInt(taQueue.textContent.charAt(taQueue.textContent.length - 1));
+
+
+                    let numTAs = parseInt(taQueue.textContent.charAt(taQueue.textContent.length - 1));
+
+                    if (isNaN(queue[2])) {
+                        timeLeft.innerHTML = Math.round(parseInt(queue[2]) / numTAs) + " minutes";
+                    } else {
+                        timeLeft.innerHTML = queue[2];
+                    }
+
+//                    timeLeft.innerHTML = queue[2];
                     toks.innerHTML = queue[3];
 
                 } else {
