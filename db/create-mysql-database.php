@@ -41,6 +41,7 @@ if(mysqli_query($link, $sql)){
  /*----------------------------- vv Tables vv ----------------------------*/
 // Attempt create users table query execution
 $sql = "CREATE TABLE usersTA(
+    id VARCHAR(100) NOT NULL UNIQUE PRIMARY KEY,
     name VARCHAR(100) NOT NULL,
     office VARCHAR(100) NOT NULL,
     photograph longblob NOT NULL,
@@ -48,19 +49,20 @@ $sql = "CREATE TABLE usersTA(
 )";
 
 if(mysqli_query($link, $sql)){
-    echo "Users table created successfully.<br>";
+    echo "TA table created successfully.<br>";
 } else{
     echo "ERROR: Could not able to execute $sql. " . mysqli_error($link);
 }
 
 $sql = "GRANT ALL ON officeHoursScheduler.usersTA TO dbuser@localhost IDENTIFIED BY 'goodbyeWorld'";
 if(mysqli_query($link, $sql)){
-    echo "Login credentials for favorites table established.<br>";
+    echo "Login credentials for TA table established.<br>";
 } else{
     echo "ERROR: Could not able to execute $sql. " . mysqli_error($link);
 }
 
 $sql = "CREATE TABLE usersInstructor(
+    id VARCHAR(100) NOT NULL UNIQUE PRIMARY KEY,
     name VARCHAR(100) NOT NULL,
     office VARCHAR(100) NOT NULL,
     photograph longblob NOT NULL,
@@ -68,35 +70,79 @@ $sql = "CREATE TABLE usersInstructor(
 )";
 
 if(mysqli_query($link, $sql)){
-    echo "Users table created successfully.<br>";
+    echo "Instructor table created successfully.<br>";
 } else{
     echo "ERROR: Could not able to execute $sql. " . mysqli_error($link);
 }
 
 $sql = "GRANT ALL ON officeHoursScheduler.usersInstructor TO dbuser@localhost IDENTIFIED BY 'goodbyeWorld'";
 if(mysqli_query($link, $sql)){
-    echo "Login credentials for favorites table established.<br>";
+    echo "Login credentials for instructor table established.<br>";
 } else{
     echo "ERROR: Could not able to execute $sql. " . mysqli_error($link);
 }
 
 $sql = "CREATE TABLE usersStudent(
+    id VARCHAR(100) NOT NULL UNIQUE PRIMARY KEY,
     name VARCHAR(100) NOT NULL,
     section VARCHAR(4) NOT NULL
 )";
 
 if(mysqli_query($link, $sql)){
-    echo "Users table created successfully.<br>";
+    echo "Student table created successfully.<br>";
 } else{
     echo "ERROR: Could not able to execute $sql. " . mysqli_error($link);
 }
 
 $sql = "GRANT ALL ON officeHoursScheduler.usersStudent TO dbuser@localhost IDENTIFIED BY 'goodbyeWorld'";
 if(mysqli_query($link, $sql)){
-    echo "Login credentials for favorites table established.<br>";
+    echo "Login credentials for student table established.<br>";
 } else{
     echo "ERROR: Could not able to execute $sql. " . mysqli_error($link);
 }
+
+$sql = "CREATE TABLE currentQ(
+    id VARCHAR(100) NOT NULL,
+    name VARCHAR(100) NOT NULL,
+    issue VARCHAR(280) NOT NULL,
+    aptTime TIMESTAMP NOT NULL,
+    position int NOT NULL
+)";
+
+if(mysqli_query($link, $sql)){
+    echo "Current queue table created successfully.<br>";
+} else{
+    echo "ERROR: Could not able to execute $sql. " . mysqli_error($link);
+}
+
+$sql = "GRANT ALL ON officeHoursScheduler.currentQ TO dbuser@localhost IDENTIFIED BY 'goodbyeWorld'";
+if(mysqli_query($link, $sql)){
+    echo "Login credentials for current queue table established.<br>";
+} else{
+    echo "ERROR: Could not able to execute $sql. " . mysqli_error($link);
+}
+
+$sql = "CREATE TABLE pastQ(
+    id VARCHAR(100) NOT NULL,
+    name VARCHAR(100) NOT NULL,
+    issue VARCHAR(280) NOT NULL,
+    aptTime TIMESTAMP NOT NULL,
+    position int NOT NULL
+)";
+
+if(mysqli_query($link, $sql)){
+    echo "Current queue table created successfully.<br>";
+} else{
+    echo "ERROR: Could not able to execute $sql. " . mysqli_error($link);
+}
+
+$sql = "GRANT ALL ON officeHoursScheduler.pastQ TO dbuser@localhost IDENTIFIED BY 'goodbyeWorld'";
+if(mysqli_query($link, $sql)){
+    echo "Login credentials for past queue table established.<br>";
+} else{
+    echo "ERROR: Could not able to execute $sql. " . mysqli_error($link);
+}
+
 
 /*----------------------------- ^^ Tables ^^ ----------------------------*/ 
 

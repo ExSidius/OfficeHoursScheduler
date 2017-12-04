@@ -32,13 +32,13 @@ function parsePhoto($dir) {
 
 }
 
-function addInstructor($name, $office, $photographDir, $section) {
+function addInstructor($id, $name, $office, $photographDir, $section) {
 
 	$link = connectToDB();
 	$image = parsePhoto($photographDir);
 
-	$sql = "INSERT INTO usersInstructor (name, office, photograph, section)
-			VALUES ('$name', '$office', '$image', '$section')";
+	$sql = "INSERT INTO usersInstructor (id, name, office, photograph, section)
+			VALUES ('$id', '$name', '$office', '$image', '$section')";
 
 	if(mysqli_query($link, $sql) === false){
 	    die("ERROR: Could not able to execute $sql. " . mysqli_error($link));
@@ -48,13 +48,13 @@ function addInstructor($name, $office, $photographDir, $section) {
 
 }
 
-function addTA($name, $office, $photographDir, $section) {
+function addTA($id, $name, $office, $photographDir, $section) {
 
 	$link = connectToDB();
 	$image = parsePhoto($photographDir);
 
-	$sql = "INSERT INTO usersTA (name, office, photograph, section)
-			VALUES ('$name', '$office', '$image', '$section')";
+	$sql = "INSERT INTO usersTA (id, name, office, photograph, section)
+			VALUES ('$id', '$name', '$office', '$image', '$section')";
 
 	if(mysqli_query($link, $sql) === false){
 	    die("ERROR: Could not able to execute $sql. " . mysqli_error($link));
@@ -64,12 +64,12 @@ function addTA($name, $office, $photographDir, $section) {
 
 }
 
-function addStudent($name, $section) {
+function addStudent($id, $name, $section) {
 
 	$link = connectToDB();
 
-	$sql = "INSERT INTO usersStudent (name, section)
-			VALUES ('$name', '$section')";
+	$sql = "INSERT INTO usersStudent (id, name, section)
+			VALUES ('$id', '$name', '$section')";
 
 	if(mysqli_query($link, $sql) === false){
 	    die("ERROR: Could not able to execute $sql. " . mysqli_error($link));
@@ -78,17 +78,38 @@ function addStudent($name, $section) {
 	mysqli_close($link);
 
 }
+
+function addToCurrentQueue() {
+	$link = connectToDB();
+
+	$sql = "SELECT COUNT(*) FROM currentQ";
+
+	if(mysqli_query($link, $sql) === false){
+	    die("ERROR: Could not able to execute $sql. " . mysqli_error($link));
+	}
+
+	$result = mysqli_query($link, $sql);
+	$rows = $result->fetch_array(MYSQLI_NUM)[0];
+
+	echo $rows;
+
+	// $sql = "INSERT INTO currentQ (id, name, issue, aptTime, position)
+	// 		VALUES ('$id', '$name', '$section')";
+
+	// if(mysqli_query($link, $sql) === false){
+	//     die("ERROR: Could not able to execute $sql. " . mysqli_error($link));
+	// }
+
+	mysqli_close($link);
+}
+
+addToCurrentQueue();
 
 $body = <<<EOBODY
 <body>
 
 </body>
 EOBODY;
-
-// addTA('TA1', 'AVW 1120', 'photosTA/roozbeh.jpg', '0101');
-// addInstructor('Instructor1', 'AVW 1120', 'photosTA/nelson.png', '0101');
-// addStudent('Student1', '0101');
-
 
 echo generatePage($body, "Admin", "", "");
 ?>
