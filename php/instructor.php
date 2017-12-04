@@ -126,6 +126,8 @@
 
     function updateStudents () {
         let studentDeck = document.getElementById("student-deck");
+        let studentQueue = document.getElementById("students-queue");
+
 
         if (requestObj.readyState === 4) {
             if (requestObj.status === 200) {
@@ -133,7 +135,8 @@
 
 //                console.log(JSON.parse(results));
 
-                let students = JSON.parse(results);
+                let size = JSON.parse(results)[0];
+                let students = JSON.parse(results)[1];
                 studentList = students;
                 let deckHTML = "";
 
@@ -142,6 +145,7 @@
                 });
 
                 studentDeck.innerHTML = deckHTML;
+                studentQueue.innerHTML = "Students in Queue: " + size;
 
             } else {
                 alert("Request Failed.");
