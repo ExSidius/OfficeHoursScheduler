@@ -218,6 +218,18 @@ function getNumberOfTokens($id) {
 	$result = mysqli_query($link, $sql);
 	$frequency = $result->num_rows;
 
+
+	$sql = "SELECT * FROM currentQ WHERE id='$id'";
+
+	if(mysqli_query($link, $sql) === false){
+	    die("ERROR: Could not able to execute $sql. " . mysqli_error($link));
+	}
+
+	// Fetches the number of times in the past 24 hours that the student has appeared in the current queue
+	$result = mysqli_query($link, $sql);
+	$frequency = $frequencty + $result->num_rows;
+
+
 	mysqli_close($link);
 
 	// Returns the remaining amount of tokens the student has
