@@ -25,7 +25,7 @@
         <div class="navbar navbar-default navbar-static-top">
             <div class="container-fluid">
                 <div class="navbar-header">
-                    <a class="navbar-brand" href="http://www.cs.umd.edu/class/fall2017/cmsc389N/staff.shtml">
+                    <a class="navbar-brand" href="./instructor.php">
                         Office Hours Scheduling
                     </a>
 
@@ -51,8 +51,7 @@
                             </ul>
                         </li>
                         <li><a class="my-nav-links line-right" href="./schedule.html" target="_blank">Schedule</a></li>
-                        <li><a class="my-nav-links line-right" href="https://www.google.com" target="_blank">Class Web Page</a></li>
-                        <li><a class="my-nav-links" href="./FAQs.html" target="_blank">FAQs</a></li>
+                        <li><a class="my-nav-links line-right" href="http://www.cs.umd.edu/class/fall2017/cmsc389N/" target="_blank">Class Web Page</a></li>
                     </ul>
                 </div>
             </div>
