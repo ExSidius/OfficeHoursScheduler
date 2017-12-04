@@ -325,7 +325,7 @@ class TA {
 	private $id;
 	private $name;
 	private $office;
-	private $photographDir
+	private $photographDir;
 	private $section;
 
 	public function __construct($id, $name, $office, $photographDir, $section) 
@@ -364,7 +364,7 @@ class Instructor {
 	private $id;
 	private $name;
 	private $office;
-	private $photographDir
+	private $photographDir;
 	private $section;
 
 	public function __construct($id, $name, $office, $photographDir, $section) 
