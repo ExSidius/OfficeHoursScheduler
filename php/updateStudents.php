@@ -11,6 +11,6 @@
     $students = listOfStudentsOnCurrentQueue();
 //    echo($students);
 
-    echo(json_encode($students));
+    echo(json_encode(Array(getCurrentQueueSize(), $students)));
 
 ?>
