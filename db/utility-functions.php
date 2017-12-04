@@ -225,6 +225,29 @@ function getNumberOfTokens($id) {
 
 }
 
+// Returns an array of arrays of table entries of all students on the current queue (in order)
+function listOfStudentsOnCurrentQueue() {
+
+	$link = connectToDB();
+
+	$sql = "SELECT * FROM currentQ";
+
+	if(mysqli_query($link, $sql) === false){
+	    die("ERROR: Could not able to execute $sql. " . mysqli_error($link));
+	}
+
+	$result = $link->query($sql);
+
+	while($row = $result->fetch_array()) {
+		$rows[] = $row;
+	}
+
+	mysqli_close($link);
+
+	return $rows;
+
+}
+
 // $time = date("Y-m-d h:i:sa");
 // $timestamp = strtotime($time);
 
@@ -234,6 +257,8 @@ function getNumberOfTokens($id) {
 // addToCurrentQueue("mdn1023", "Michael Nguyen", "Entry 2");
 // addToCurrentQueue("mdn1023", "Michael Nguyen", "Entry 3");
 // addToCurrentQueue("mdn1023", "Michael Nguyen", "Entry 4");
+
+// listOfStudentsOnCurrentQueue();
 
 // updateCurrentQueue();
 // echo getNumberOfTokens("mdn1023");
