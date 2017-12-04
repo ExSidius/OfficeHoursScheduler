@@ -121,5 +121,56 @@
     </div>
 
     <script src="./../js/default.js"></script>
+    <script>
+        let requestObj = new XMLHttpRequest();
+        let firstFeedbackMessage = true;
+//        let queue;
+
+        setInterval(lookup, 1000);
+
+        function lookup () {
+            let scriptURL = "./updateQueue.php";
+
+            let randomValueToAvoidCache = (new Date()).getTime();
+            scriptURL += "?randomValue=" + randomValueToAvoidCache;
+            console.log(scriptURL);
+
+            let asynch = true;
+
+            requestObj.open("GET", scriptURL, asynch);
+            requestObj.onreadystatechange = updateQueue;
+
+            requestObj.send(null);
+
+        }
+
+        function updateQueue () {
+            let studentQueue = document.getElementById("student-queue");
+            let queuePos = document.getElementById("queue-pos");
+            let timeLeft = document.getElementById("time");
+
+
+            if (requestObj.readyState === 4) {
+                if (requestObj.status === 200) {
+                    let results = requestObj.responseText;
+
+//                console.log(JSON.parse(results));
+
+                    let students = JSON.parse(results);
+                    studentList = students;
+                    let deckHTML = "";
+
+                    students.forEach(function (el) {
+                        deckHTML += '<button onclick="" class="student-name">' + el[1] + '</button><br><br>';
+                    });
+
+                    studentDeck.innerHTML = deckHTML;
+
+                } else {
+                    alert("Request Failed.");
+                }
+            }
+        }
+    </script>
 </body>
 </html>
