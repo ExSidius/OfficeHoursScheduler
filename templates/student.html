@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
 
-    <title>Instructor Template</title>
+    <title>Student Template</title>
     <!-- Latest compiled and minified CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 
@@ -68,38 +68,58 @@
                         <p class="ta-name"><a target="_blank" href="https://en.wikipedia.org/wiki/Jack_Johnson_(musician)">Jack Johnson</a></p><br>
                         <p class="ta-name"><a target="_blank" href="https://en.wikipedia.org/wiki/Patrice_O%27Neal">Patrice O'Neal</a></p><br>
                         <p class="ta-name"><a target="_blank" href="https://en.wikipedia.org/wiki/Lizz_Winstead">Lizz Winstead</a></p><br>
+
                     </div>
                 </div>
 
                 <div class="col-md-3 student-deck item">
                     <h3 id="students-queue">Students in Queue: 3</h3>
                     <hr>
-                    <div class="student-deck">
-                        <button onclick="" class="student-name">Banana Republic</button><br><br>
-                        <button onclick="" class="student-name">Beastie Boy</button><br><br>
-                        <button onclick="" class="student-name">Fiona Apple</button><br><br>
-                        <button onclick="" class="student-name">Shaq O'Neal</button><br><br>
-                        <button onclick="" class="student-name">Bill Burr</button><br><br>
-                        <button onclick="" class="student-name">Ray Dalio</button><br><br>
-                        <button onclick="" class="student-name">Walter Isaacson</button><br><br>
-                        <button onclick="" class="student-name">Edgar Wright</button><br><br>
+                    <p class="queue-message">
+                        You are <strong id="queue-pos">#3</strong> in the queue.
+                        <br>
+                        <br>
+                        You should be helped in roughly<br><strong id="time">5 minutes</strong>.
+                    </p>
+                </div>
+
+                <div class="col-md-6 queue-form item">
+                    <h3>Get on Queue</h3>
+                    <hr>
+                    <div class="panel panel-default">
+                        <div class="panel-body">
+                            <div id="ticket-submit-area">
+                                <p id="num-tokens">You have <strong>5</strong> tokens remaining.</p>
+                                <p><small>This will add you to the office hours queue and will cost one OH token.
+                                    If you run out of tokens, you will not be able to receive office hours assistance
+                                    until regeneration (every 24 hours).</small>
+                                </p>
+                                <hr>
+                                <form id="ticket-submit-form">
+                                    <textarea id="ticket-desc" class="form-control" rows="2" placeholder="Describe your issue in less than two sentences."></textarea>
+                                    <br>
+                                    <button id="ticket-button" type="submit" class="btn btn-default">Submit</button>
+                                </form>
+                            </div>
+                        </div>
                     </div>
                 </div>
 
-
-                <div class="col-md-3 how-to item">
+                <div class="col-md-6 how-to item">
                     <h3>How-To</h3>
                     <hr>
-                    Click the student name to see more information about them.
+                    This is the Office Hours Scheduler.
+                    <br><br>
+                    You can see which TAs are available, how many students are on queue (and your position in queue), and you can submit a ticket.
+                    <br><br>
+                    <a href="./FAQs.html">Check out FAQs for more information.</a>
                 </div>
-
             </div>
-
 
         </div>
 
     </div>
 
-<script src="./../js/default.js"></script>
+    <script src="./../js/default.js"></script>
 </body>
 </html>

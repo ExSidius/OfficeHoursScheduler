@@ -120,7 +120,7 @@ body:before {
   margin-bottom: 10px;
   text-transform: uppercase;
   letter-spacing: .12em;
-  text-align: center; 
+  text-align: center;
 }
 #name{
   /* over ride w !important and target with ids*/

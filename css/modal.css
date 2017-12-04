@@ -1,0 +1,27 @@
+.container {
+    height: 300px;
+    width: 500px;
+    background-color: salmon;
+    border-radius: 25px;
+    text-align: center;
+    color: white;
+    font-family: Helvetica;
+}
+
+.container h3 {
+    padding-top: 30px;
+}
+
+.left {
+    margin: 6px;
+    width: 55%;
+    float: left;
+    /*padding: 10px;*/
+}
+
+.right {
+    margin: 6px;
+    width: 40%;
+    float: right;
+    /*padding: 10px;*/
+}

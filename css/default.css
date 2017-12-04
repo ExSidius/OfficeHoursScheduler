@@ -1,0 +1,16 @@
+.ta-name, .student-name {
+    font-size: 15px;
+    text-decoration: none;
+}
+
+.queue-message {
+    font-size: 18px;
+}
+
+.how-to {
+    font-size: 17px;
+}
+
+button {
+    border: none;
+}
