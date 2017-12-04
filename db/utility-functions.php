@@ -292,40 +292,110 @@ function getPositionInQueue($id) {
 
 }
 
-// $time = date("Y-m-d h:i:sa");
-// $timestamp = strtotime($time);
+class Student {
 
-// $cutoffTime =  $timestamp - 86400;
+	private $id;
+	private $name;
+	private $section;
 
-// addToCurrentQueue("mdn1023", "Michael Nguyen", "Entry 1");
-// addToCurrentQueue("mdn1023", "Michael Nguyen", "Entry 2");
-// addToCurrentQueue("mdn1023", "Michael Nguyen", "Entry 3");
-// addToCurrentQueue("mdn1023", "Michael Nguyen", "Entry 4");
-// addToCurrentQueue("student1", "Student John", "Entry 5");
-// addToCurrentQueue("student1", "Student John", "Entry 6");
-// addToCurrentQueue("student1", "Student John", "Entry 7");
+	public function __construct($id, $name, $section) 
+    {
+        $this->id = $id;
+        $this->name = $name;
+        $this->section = $section;
+    }
 
-// echo getPositionInQueue("student");
+    public function getId() {
+    	return $this->id;
+    }
 
-// listOfStudentsOnCurrentQueue();
+    public function getName() {
+    	return $this->name;
+    }
 
-// updateCurrentQueue();
-// echo getNumberOfTokens("mdn1023");
+  	public function getSection() {
+    	return $this->section;
+    }
 
-// echo getCurrentQueueSize();
 
-// addToPastQueue("mdn1023", "Michael Nguyen", "This should be deleted.", $cutoffTime);
-// addToPastQueue("mdn1023", "Michael Nguyen", "This should NOT be deleted.", $timestamp);
+}
 
-// removeOldRowsInPastQueue();
+class TA {
+	
+	private $id;
+	private $name;
+	private $office;
+	private $photographDir
+	private $section;
 
-// $body = <<<EOBODY
-// <body>
+	public function __construct($id, $name, $office, $photographDir, $section) 
+    {
+        $this->id = $id;
+        $this->name = $name;
+        $this->office = $office;
+        $this->photographDir = $photographDir;
+        $this->section = $section;
+    }
 
-// </body>
-// EOBODY;
+    public function getId() {
+    	return $this->id;
+    }
 
-// echo generatePage($body, "Admin", "", "");
-// 
+    public function getName() {
+    	return $this->name;
+    }
+
+    public function getOffice() {
+    	return $this->office;
+    }
+
+    public function getphotographDir() {
+    	return $this->photographDir;
+    }
+
+  	public function getSection() {
+    	return $this->section;
+    }
+
+}
+
+class Instructor {
+	
+	private $id;
+	private $name;
+	private $office;
+	private $photographDir
+	private $section;
+
+	public function __construct($id, $name, $office, $photographDir, $section) 
+    {
+        $this->id = $id;
+        $this->name = $name;
+        $this->office = $office;
+        $this->photographDir = $photographDir;
+        $this->section = $section;
+    }
+
+    public function getId() {
+    	return $this->id;
+    }
+
+    public function getName() {
+    	return $this->name;
+    }
+
+    public function getOffice() {
+    	return $this->office;
+    }
+
+    public function getphotographDir() {
+    	return $this->photographDir;
+    }
+
+  	public function getSection() {
+    	return $this->section;
+    }
+
+}
 
 ?>
