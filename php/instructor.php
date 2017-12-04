@@ -141,11 +141,39 @@
                 let deckHTML = "";
 
                 students.forEach(function (el) {
-                    deckHTML += '<button onclick="" class="student-name">' + el[1] + '</button><br><br>';
+                    deckHTML += '<button id="' + el[0] + '" onclick="knockOff()" class="student-name">' + el[0] + '</button><br><br>';
                 });
 
                 studentDeck.innerHTML = deckHTML;
                 studentQueue.innerHTML = "Students in Queue: " + size;
+
+            } else {
+                alert("Request Failed.");
+            }
+        }
+    }
+
+    function knockOff () {
+        let scriptURL = "./knockOffStudents.php";
+
+        let randomValueToAvoidCache = (new Date()).getTime();
+        scriptURL += "?randomValue=" + randomValueToAvoidCache;
+        console.log(scriptURL);
+
+        let asynch = true;
+
+        requestObj.open("GET", scriptURL, asynch);
+        requestObj.onreadystatechange = knockOffStud;
+
+        requestObj.send(null);
+    }
+
+    function knockOffStud () {
+        if (requestObj.readyState === 4) {
+            if (requestObj.status === 200) {
+                let results = requestObj.responseText;
+
+                console.log(results);
 
             } else {
                 alert("Request Failed.");

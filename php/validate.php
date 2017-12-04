@@ -32,7 +32,7 @@
         $expire_time = time() + (86400 * 30);
 
         setcookie($cookie_name, $cookie_value, $expire_time, "/");
-        header("Location: ../templates/student.html");
+        header("Location: ./student.php");
         exit();
     }
 
