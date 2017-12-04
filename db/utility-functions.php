@@ -22,6 +22,7 @@ function connectToDB() {
 
 }
 
+// Given a filepath to an image, parse it into a longblob that can be inserted into table
 function parsePhoto($dir) {
 
 	$fp = fopen($dir, 'r');
@@ -32,6 +33,7 @@ function parsePhoto($dir) {
 
 }
 
+// Add an instructor into the instructors table
 function addInstructor($id, $name, $office, $photographDir, $section) {
 
 	$link = connectToDB();
@@ -48,6 +50,7 @@ function addInstructor($id, $name, $office, $photographDir, $section) {
 
 }
 
+// Add a TA into the TAs table
 function addTA($id, $name, $office, $photographDir, $section) {
 
 	$link = connectToDB();
@@ -64,6 +67,7 @@ function addTA($id, $name, $office, $photographDir, $section) {
 
 }
 
+// Add a student into the students table
 function addStudent($id, $name, $section) {
 
 	$link = connectToDB();
@@ -79,6 +83,7 @@ function addStudent($id, $name, $section) {
 
 }
 
+// When a student signs in for office hours, they are added to the current queue
 function addToCurrentQueue($id, $name, $issue) {
 
 	$link = connectToDB();
@@ -89,11 +94,14 @@ function addToCurrentQueue($id, $name, $issue) {
 	    die("ERROR: Could not able to execute $sql. " . mysqli_error($link));
 	}
 
+	// Fetch the number of current entries in the queue (current queue size)
 	$result = mysqli_query($link, $sql);
 	$rows = $result->fetch_array(MYSQLI_NUM)[0];
 
+	// Set the position of the student as the current queue size + 1
 	$position = $rows + 1;
 
+	// Generate a numerical timestamp based on the current time to be added to table
 	$time = date("Y-m-d h:i:sa");
 	$time = strtotime($time);
 
@@ -108,6 +116,7 @@ function addToCurrentQueue($id, $name, $issue) {
 
 }
 
+// After a student has been seen by a TA, this function will be used to insert them into the past queue
 function addToPastQueue($id, $name, $issue, $time) {
 
 	$link = connectToDB();
@@ -123,14 +132,19 @@ function addToPastQueue($id, $name, $issue, $time) {
 
 }
 
+// This function removes any entries in the past queue that are older than 24 hours
 function removeOldRowsInPastQueue() {
 
+	$link = connectToDB();
+
+	// Generate a numerical timestamp based on the current time
 	$time = date("Y-m-d h:i:sa");
 	$timestamp = strtotime($time);
 
-	$cutoffTime =  $timestamp - 86400;
-	$link = connectToDB();
-
+	// Set a cutoff time that is 24 hours previous to the current timestamp
+	$cutoffTime = $timestamp - 86400;
+	
+	// Delete all rows in table where the timestamp is less than the cutoff time
 	$sql = "DELETE FROM pastQ WHERE aptTime < $cutoffTime";
 
 	if(mysqli_query($link, $sql) === false){
@@ -141,6 +155,9 @@ function removeOldRowsInPastQueue() {
 
 }
 
+// Updates the current queue by removing the student who was just seen, 
+// updating the positions of the remaining students on the queue, inserting
+// that student into the past queue, then removing old rows from the past queue.
 function updateCurrentQueue() {
 
 	$link = connectToDB();
@@ -153,6 +170,7 @@ function updateCurrentQueue() {
 
 	$result = mysqli_query($link, $sql);
 
+	// Fetches the fields of the student with position = 1
 	$arr = $result->fetch_assoc();
 
 	$id = $arr["id"];
@@ -160,14 +178,17 @@ function updateCurrentQueue() {
 	$issue = $arr["issue"];
 	$timestamp = $arr["aptTime"];
 
+	// Add the student to the past queue
 	addToPastQueue($id, $name, $issue, $timestamp);
 
+	// Remove the student from the current queue
 	$sql = "DELETE FROM currentQ WHERE position=1";
 
 	if(mysqli_query($link, $sql) === false){
 	    die("ERROR: Could not able to execute $sql. " . mysqli_error($link));
 	}
 
+	// Update positions of all remaining students on the current queue
 	$sql = "UPDATE currentQ SET position = position-1";
 
 	if(mysqli_query($link, $sql) === false){
@@ -177,6 +198,30 @@ function updateCurrentQueue() {
 	removeOldRowsInPastQueue();
 
 	mysqli_close($link);
+
+}
+
+// Returns the number of daily tokens given a student id
+function getNumberOfTokens($id) {
+
+	removeOldRowsInPastQueue();
+
+	$link = connectToDB();
+
+	$sql = "SELECT * FROM pastQ WHERE id='$id'";
+
+	if(mysqli_query($link, $sql) === false){
+	    die("ERROR: Could not able to execute $sql. " . mysqli_error($link));
+	}
+
+	// Fetches the number of times in the past 24 hours that the student has appeared in the past queue
+	$result = mysqli_query($link, $sql);
+	$frequency = $result->num_rows;
+
+	mysqli_close($link);
+
+	// Returns the remaining amount of tokens the student has
+	return 5 - $frequency;
 
 }
 
@@ -191,17 +236,20 @@ function updateCurrentQueue() {
 // addToCurrentQueue("mdn1023", "Michael Nguyen", "Entry 4");
 
 // updateCurrentQueue();
+// echo getNumberOfTokens("mdn1023");
 
 // addToPastQueue("mdn1023", "Michael Nguyen", "This should be deleted.", $cutoffTime);
 // addToPastQueue("mdn1023", "Michael Nguyen", "This should NOT be deleted.", $timestamp);
 
 // removeOldRowsInPastQueue();
 
-$body = <<<EOBODY
-<body>
+// $body = <<<EOBODY
+// <body>
 
-</body>
-EOBODY;
+// </body>
+// EOBODY;
 
-echo generatePage($body, "Admin", "", "");
+// echo generatePage($body, "Admin", "", "");
+// 
+
 ?>
