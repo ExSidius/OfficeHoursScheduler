@@ -19,3 +19,7 @@ table {
     text-align: center;
     alignment: center;
 }
+
+th, td {
+    padding: 2px;
+}
