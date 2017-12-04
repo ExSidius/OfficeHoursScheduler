@@ -75,7 +75,9 @@
                 <div class="col-md-3 student-deck item">
                     <h3 id="students-queue">Students in Queue: 3</h3>
                     <hr>
+
                     <p class="queue-message">
+                        Welcome, <?php echo('<span id="uid">'.$_COOKIE["uid"].'</span>') ?>!<br><br>
                         You are <strong id="queue-pos">#3</strong> in the queue.
                         <br>
                         <br>
@@ -89,14 +91,17 @@
                     <div class="panel panel-default">
                         <div class="panel-body">
                             <div id="ticket-submit-area">
-                                <p id="num-tokens">You have <strong>5</strong> tokens remaining.</p>
+                                <p id="num-tokens">You have <strong id="num-toks">5</strong> tokens remaining.</p>
                                 <p><small>This will add you to the office hours queue and will cost one OH token.
                                     If you run out of tokens, you will not be able to receive office hours assistance
                                     until regeneration (every 24 hours).</small>
                                 </p>
                                 <hr>
-                                <form id="ticket-submit-form">
-                                    <textarea id="ticket-desc" class="form-control" rows="2" placeholder="Describe your issue in less than two sentences."></textarea>
+
+<!--                                This code has come from cmsc330hours.cs.umd.edu - it is entirely their programmer's with minor modifications.-->
+
+                                <form id="ticket-submit-form" method="post" action="addToQueue.php">
+                                    <textarea name="issue" id="ticket-desc" class="form-control" rows="2" placeholder="Describe your issue in less than two sentences."></textarea>
                                     <br>
                                     <button id="ticket-button" type="submit" class="btn btn-default">Submit</button>
                                 </form>
@@ -145,9 +150,11 @@
         }
 
         function updateQueue () {
-            let studentQueue = document.getElementById("student-queue");
+            let studentQueue = document.getElementById("students-queue");
+            let taQueue = document.getElementById("ta-queue");
             let queuePos = document.getElementById("queue-pos");
             let timeLeft = document.getElementById("time");
+            let toks = document.getElementById("num-toks");
 
 
             if (requestObj.readyState === 4) {
@@ -156,15 +163,15 @@
 
 //                console.log(JSON.parse(results));
 
-                    let students = JSON.parse(results);
-                    studentList = students;
-                    let deckHTML = "";
+//                    console.log(results);
+//                    console.log();
 
-                    students.forEach(function (el) {
-                        deckHTML += '<button onclick="" class="student-name">' + el[1] + '</button><br><br>';
-                    });
+                    let queue = JSON.parse(results);
 
-                    studentDeck.innerHTML = deckHTML;
+                    studentQueue.innerHTML = "Students in Queue: " + queue[0];
+                    queuePos.innerHTML = queue[1];
+                    timeLeft.innerHTML = queue[2] / parseInt(taQueue.textContent.charAt(taQueue.textContent.length - 1));
+                    toks.innerHTML = queue[3];
 
                 } else {
                     alert("Request Failed.");
